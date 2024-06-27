@@ -4,6 +4,7 @@ import hu.bme.sch.cmsch.component.ComponentApiBase
 import hu.bme.sch.cmsch.component.app.MenuService
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ControlPermissions
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.stereotype.Controller
@@ -16,7 +17,8 @@ class ConferenceComponentController(
     adminMenuService: AdminMenuService,
     component: ConferenceComponent,
     menuService: MenuService,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     ConferenceComponent::class.java,
@@ -25,5 +27,6 @@ class ConferenceComponentController(
     "Konferencia",
     "Konferencia testreszabása",
     menuService = menuService,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 )

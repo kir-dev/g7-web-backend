@@ -33,7 +33,8 @@ class RiddlesByGroupsController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : TwoDeepEntityPage<RiddleStatsVirtualEntity, RiddleMappingVirtualEntity>(
     "riddles-by-groups",
     RiddleStatsVirtualEntity::class,
@@ -82,6 +83,7 @@ class RiddlesByGroupsController(
     },
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

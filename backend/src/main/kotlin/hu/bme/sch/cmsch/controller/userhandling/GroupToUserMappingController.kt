@@ -8,10 +8,7 @@ import hu.bme.sch.cmsch.controller.admin.calculateSearchSettings
 import hu.bme.sch.cmsch.model.GroupToUserMappingEntity
 import hu.bme.sch.cmsch.repository.GroupRepository
 import hu.bme.sch.cmsch.repository.GroupToUserMappingRepository
-import hu.bme.sch.cmsch.service.AdminMenuService
-import hu.bme.sch.cmsch.service.AuditLogService
-import hu.bme.sch.cmsch.service.ImportService
-import hu.bme.sch.cmsch.service.StaffPermissions
+import hu.bme.sch.cmsch.service.*
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.PlatformTransactionManager
@@ -28,7 +25,8 @@ class GroupToUserMappingController(
     objectMapper: ObjectMapper,
     private val groups: GroupRepository,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<GroupToUserMappingEntity>(
     "group-to-user",
     GroupToUserMappingEntity::class, ::GroupToUserMappingEntity,
@@ -40,6 +38,7 @@ class GroupToUserMappingController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

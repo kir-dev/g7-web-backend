@@ -21,7 +21,8 @@ class SoldProductStatsController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<ProductGroupVirtualEntity>(
     "track-sold",
     ProductGroupVirtualEntity::class, ::ProductGroupVirtualEntity,
@@ -37,6 +38,7 @@ class SoldProductStatsController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

@@ -3,10 +3,7 @@ package hu.bme.sch.cmsch.component.gallery
 import com.fasterxml.jackson.databind.ObjectMapper
 import hu.bme.sch.cmsch.controller.admin.OneDeepEntityPage
 import hu.bme.sch.cmsch.controller.admin.calculateSearchSettings
-import hu.bme.sch.cmsch.service.AdminMenuService
-import hu.bme.sch.cmsch.service.AuditLogService
-import hu.bme.sch.cmsch.service.ImportService
-import hu.bme.sch.cmsch.service.StaffPermissions
+import hu.bme.sch.cmsch.service.*
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Controller
@@ -24,7 +21,8 @@ class GalleryController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<GalleryEntity>(
     "gallery",
     GalleryEntity::class, ::GalleryEntity,
@@ -35,6 +33,7 @@ class GalleryController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
@@ -55,4 +54,3 @@ class GalleryController(
     adminMenuPriority = 1,
     searchSettings = calculateSearchSettings<GalleryEntity>(true)
 )
-

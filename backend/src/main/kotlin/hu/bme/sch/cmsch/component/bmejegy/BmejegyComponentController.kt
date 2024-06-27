@@ -4,6 +4,7 @@ import hu.bme.sch.cmsch.component.ComponentApiBase
 import hu.bme.sch.cmsch.component.app.MenuService
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ControlPermissions
 import hu.bme.sch.cmsch.util.getUserOrNull
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
@@ -21,7 +22,8 @@ class BmejegyComponentController(
     component: BmejegyComponent,
     menuService: MenuService,
     private val legacyBmejegyTimer: Optional<LegacyBmejegyTimer>,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     BmejegyComponent::class.java,
@@ -30,7 +32,8 @@ class BmejegyComponentController(
     "BME JEGY",
     "Jegyek testreszabása",
     auditLogService = auditLogService,
-    menuService = menuService
+    menuService = menuService,
+    storageService = storageService
 ) {
 
     @GetMapping("/action/clean")
@@ -42,5 +45,3 @@ class BmejegyComponentController(
     }
 
 }
-
-

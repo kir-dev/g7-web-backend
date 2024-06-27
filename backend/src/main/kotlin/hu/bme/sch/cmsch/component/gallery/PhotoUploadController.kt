@@ -1,12 +1,8 @@
 package hu.bme.sch.cmsch.component.gallery
 
 import hu.bme.sch.cmsch.component.app.ApplicationComponent
-import hu.bme.sch.cmsch.service.AdminMenuEntry
-import hu.bme.sch.cmsch.service.AdminMenuService
-import hu.bme.sch.cmsch.service.AuditLogService
-import hu.bme.sch.cmsch.service.ControlPermissions
+import hu.bme.sch.cmsch.service.*
 import hu.bme.sch.cmsch.util.getUser
-import hu.bme.sch.cmsch.util.uploadFile
 import jakarta.annotation.PostConstruct
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.security.core.Authentication
@@ -26,6 +22,7 @@ class PhotoUploadController(
     private val applicationComponent: ApplicationComponent,
     private val auditLog: AuditLogService,
     private val galleryService: GalleryService,
+    private val storageService: StorageService
 ) {
 
     private val permissionControl = ControlPermissions.PERMISSION_CONTROL_GALLERY
@@ -85,7 +82,7 @@ class PhotoUploadController(
                     originalFilename.substring(if (originalFilename.contains(".")) originalFilename.lastIndexOf('.') else 0)
             val fileUrl = "${applicationComponent.adminSiteUrl.getValue()}cdn/public/${newName}"
             galleryService.savePhoto(GalleryEntity(title = name, highlighted = false, url = fileUrl))
-            file.uploadFile("public", newName)
+            storageService.saveNamedObject("public", newName, file)
             newNames.add(newName)
         }
         return "redirect:/admin/control/upload-photo?uploaded=${newNames.joinToString(",")}"

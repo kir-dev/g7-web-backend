@@ -4,6 +4,7 @@ import hu.bme.sch.cmsch.component.ComponentApiBase
 import hu.bme.sch.cmsch.service.AdminMenuCategory
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ControlPermissions.PERMISSION_CONTROL_APP
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.core.env.Environment
@@ -18,7 +19,8 @@ class ApplicationComponentController(
     component: ApplicationComponent,
     menuService: MenuService,
     private val env: Environment,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     ApplicationComponent::class.java,
@@ -30,7 +32,8 @@ class ApplicationComponentController(
     menuService = menuService,
     insertComponentCategory = false,
     componentCategory = ApplicationComponent.FUNCTIONALITIES_CATEGORY,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 ) {
 
     override fun onUpdate() {
@@ -66,4 +69,3 @@ class ApplicationComponentController(
     }
 
 }
-

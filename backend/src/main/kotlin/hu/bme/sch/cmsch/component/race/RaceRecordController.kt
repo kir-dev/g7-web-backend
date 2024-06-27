@@ -35,7 +35,8 @@ class RaceRecordController(
     private val startupPropertyConfig: StartupPropertyConfig,
     private val clock: TimeService,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<RaceRecordEntity>(
     "race",
     RaceRecordEntity::class, ::RaceRecordEntity,
@@ -46,6 +47,7 @@ class RaceRecordController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

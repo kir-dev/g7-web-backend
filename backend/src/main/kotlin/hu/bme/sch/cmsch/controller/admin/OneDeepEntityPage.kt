@@ -12,7 +12,6 @@ import hu.bme.sch.cmsch.service.*
 import hu.bme.sch.cmsch.service.ImplicitPermissions.PERMISSION_NOBODY
 import hu.bme.sch.cmsch.util.getUser
 import hu.bme.sch.cmsch.util.transaction
-import hu.bme.sch.cmsch.util.uploadFile
 import jakarta.annotation.PostConstruct
 import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
@@ -103,6 +102,7 @@ open class OneDeepEntityPage<T : IdentifiableEntity>(
     internal val dataSource: EntityPageDataSource<T, Int>,
     internal val importService: ImportService,
     internal val adminMenuService: AdminMenuService,
+    internal val storageService: StorageService,
     internal val component: ComponentBase,
     internal val auditLog: AuditLogService,
     internal val objectMapper: ObjectMapper,
@@ -668,7 +668,7 @@ open class OneDeepEntityPage<T : IdentifiableEntity>(
                                 if (delete0) {
                                     (it.first as KMutableProperty1<out Any, *>).setter.call(entity, "")
                                 } else {
-                                    file0?.uploadFile(view)?.let { file ->
+                                    file0?.let { file -> storageService.saveObject(view, file) }?.ifPresent { file ->
                                         (it.first as KMutableProperty1<out Any, *>).setter.call(entity, "$view/$file")
                                         newValues.append(it.first.name).append("=name@").append(view)
                                             .append("/").append(file).append(", ")
@@ -679,7 +679,7 @@ open class OneDeepEntityPage<T : IdentifiableEntity>(
                                 if (delete1) {
                                     (it.first as KMutableProperty1<out Any, *>).setter.call(entity, "")
                                 } else {
-                                    file1?.uploadFile(view)?.let { file ->
+                                    file1?.let { file -> storageService.saveObject(view, file) }?.ifPresent { file ->
                                         newValues.append(it.first.name).append("=name@").append(view)
                                             .append("/").append(file).append(", ")
                                         (it.first as KMutableProperty1<out Any, *>).setter.call(entity, "$view/$file")

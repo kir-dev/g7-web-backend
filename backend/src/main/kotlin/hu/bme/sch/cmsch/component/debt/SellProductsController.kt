@@ -32,7 +32,8 @@ class SellProductsController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<ProductEntity>(
     "sell-products",
     ProductEntity::class, ::ProductEntity,
@@ -46,6 +47,7 @@ class SellProductsController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
@@ -85,7 +87,8 @@ class SellFoodController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<ProductEntity>(
     "sell-food",
     ProductEntity::class, ::ProductEntity,
@@ -99,6 +102,7 @@ class SellFoodController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
@@ -138,7 +142,8 @@ class SellMerchController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<ProductEntity>(
     "sell-merch",
     ProductEntity::class, ::ProductEntity,
@@ -152,6 +157,7 @@ class SellMerchController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

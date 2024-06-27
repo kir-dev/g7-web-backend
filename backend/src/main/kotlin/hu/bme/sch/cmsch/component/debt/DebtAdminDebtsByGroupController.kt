@@ -27,7 +27,8 @@ class DebtAdminDebtsByGroupController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : TwoDeepEntityPage<DebtsByGroupVirtualEntity, SoldProductEntity>(
     "debts-by-group",
     DebtsByGroupVirtualEntity::class,
@@ -57,6 +58,7 @@ class DebtAdminDebtsByGroupController(
     soldProductRepository,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

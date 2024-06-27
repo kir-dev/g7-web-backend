@@ -29,7 +29,8 @@ class LeaderBoardGroupController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<LeaderBoardAsGroupEntryDto>(
     "group-toplist",
     LeaderBoardAsGroupEntryDto::class, ::LeaderBoardAsGroupEntryDto,
@@ -45,6 +46,7 @@ class LeaderBoardGroupController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

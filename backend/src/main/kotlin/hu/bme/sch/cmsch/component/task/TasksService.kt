@@ -6,8 +6,8 @@ import hu.bme.sch.cmsch.model.RoleType
 import hu.bme.sch.cmsch.model.UserEntity
 import hu.bme.sch.cmsch.repository.GroupRepository
 import hu.bme.sch.cmsch.repository.UserRepository
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.TimeService
-import hu.bme.sch.cmsch.util.uploadFile
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.retry.annotation.Backoff
@@ -30,7 +30,8 @@ open class TasksService(
     private val taskComponent: TaskComponent,
     private val listeners: List<TaskSubmissionListener>,
     private val userRepository: UserRepository,
-    private val groupRepository: GroupRepository
+    private val groupRepository: GroupRepository,
+    private val storageService: StorageService
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -283,7 +284,7 @@ open class TasksService(
                 if (file == null || imageFileNameInvalid(file))
                     return TaskSubmissionStatus.INVALID_IMAGE
 
-                val fileName = file.uploadFile(target)
+                val fileName = storageService.saveObject(target, file)
 
                 val submission = SubmittedTaskEntity(
                     0, task, groupId, groupName ?: "",
@@ -308,10 +309,9 @@ open class TasksService(
 
             }
             TaskType.BOTH -> {
+                val fileName = file?.let { storageService.saveObject(target, it) }?.getOrNull() ?: ""
                 if (file != null && imageFileNameInvalid(file))
                     return TaskSubmissionStatus.INVALID_IMAGE
-
-                val fileName = file?.uploadFile(target) ?: ""
 
                 val submission = SubmittedTaskEntity(
                     0, task, groupId, groupName ?: "",
@@ -339,7 +339,7 @@ open class TasksService(
                 if (file == null || pdfFileNameInvalid(file))
                     return TaskSubmissionStatus.INVALID_PDF
 
-                val fileName = file.uploadFile(target)
+                val fileName = storageService.saveObject(target, file)
 
                 val submission = SubmittedTaskEntity(
                     0, task, groupId, groupName ?: "",
@@ -401,7 +401,7 @@ open class TasksService(
             TaskType.IMAGE -> {
                 if (file == null || imageFileNameInvalid(file))
                     return TaskSubmissionStatus.INVALID_IMAGE
-                val fileName = file.uploadFile(target)
+                val fileName = storageService.saveObject(target, file)
 
                 submission.imageUrlAnswer = "$target/$fileName"
                 submission.rejected = false
@@ -422,7 +422,7 @@ open class TasksService(
             }
             TaskType.BOTH -> {
                 if (file != null && !imageFileNameInvalid(file)) {
-                    val fileName = file.uploadFile(target)
+                    val fileName = storageService.saveObject(target, file)
                     submission.imageUrlAnswer = "$target/$fileName"
                 }
                 submission.textAnswerLob = answer.textAnswer
@@ -445,7 +445,7 @@ open class TasksService(
             TaskType.ONLY_PDF -> {
                 if (file == null || pdfFileNameInvalid(file))
                     return TaskSubmissionStatus.INVALID_PDF
-                val fileName = file.uploadFile(target)
+                val fileName = storageService.saveObject(target, file)
 
                 submission.fileUrlAnswer = "$target/$fileName"
                 submission.rejected = false

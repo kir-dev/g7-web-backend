@@ -26,7 +26,8 @@ class TokenPublicTokensStatsController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<TokenStatVirtualEntity>(
     "stamps",
     TokenStatVirtualEntity::class, ::TokenStatVirtualEntity,
@@ -57,6 +58,7 @@ class TokenPublicTokensStatsController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

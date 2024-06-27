@@ -5,6 +5,7 @@ import hu.bme.sch.cmsch.controller.admin.OneDeepEntityPage
 import hu.bme.sch.cmsch.controller.admin.calculateSearchSettings
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ImportService
 import hu.bme.sch.cmsch.service.StaffPermissions
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
@@ -24,7 +25,8 @@ class SheetsController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<SheetsEntity>(
     "sheets",
     SheetsEntity::class, ::SheetsEntity,
@@ -35,6 +37,7 @@ class SheetsController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

@@ -9,6 +9,7 @@ import hu.bme.sch.cmsch.controller.admin.SimpleEntityPage
 import hu.bme.sch.cmsch.model.IdentifiableEntity
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ImportService
 import hu.bme.sch.cmsch.service.StaffPermissions.PERMISSION_EXPORT_ADMISSION
 import hu.bme.sch.cmsch.service.StaffPermissions.PERMISSION_VALIDATE_ADMISSION
@@ -51,7 +52,8 @@ class AdmissionByFormController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<AdmissionFormEntry>(
     "admission-by-form",
     AdmissionFormEntry::class, ::AdmissionFormEntry,
@@ -71,6 +73,7 @@ class AdmissionByFormController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
@@ -137,4 +140,3 @@ class AdmissionByFormController(
     }
 
 }
-

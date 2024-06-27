@@ -21,7 +21,8 @@ class DebtsOfUserController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<SoldProductEntity>(
     "my-debts",
     SoldProductEntity::class, ::SoldProductEntity,
@@ -35,6 +36,7 @@ class DebtsOfUserController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
@@ -43,4 +45,3 @@ class DebtsOfUserController(
     adminMenuIcon = "account_balance_wallet",
     adminMenuPriority = 6,
 )
-

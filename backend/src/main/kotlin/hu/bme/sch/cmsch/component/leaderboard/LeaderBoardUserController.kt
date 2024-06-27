@@ -29,7 +29,8 @@ class LeaderBoardUserController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<LeaderBoardAsUserEntryDto>(
     "user-toplist",
     LeaderBoardAsUserEntryDto::class, ::LeaderBoardAsUserEntryDto,
@@ -45,6 +46,7 @@ class LeaderBoardUserController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

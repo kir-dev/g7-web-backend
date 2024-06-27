@@ -33,7 +33,8 @@ class RaceCategoryStatController(
     objectMapper: ObjectMapper,
     private val startupPropertyConfig: StartupPropertyConfig,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : TwoDeepEntityPage<RaceCategoryEntity, RaceEntryDto>(
     "race-category-stat",
     RaceCategoryEntity::class,
@@ -46,6 +47,7 @@ class RaceCategoryStatController(
     object : ManualRepository<RaceEntryDto, Int>() {},
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

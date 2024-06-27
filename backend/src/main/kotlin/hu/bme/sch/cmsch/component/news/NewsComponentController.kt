@@ -15,7 +15,8 @@ class NewsComponentController(
     adminMenuService: AdminMenuService,
     component: NewsComponent,
     menuService: MenuService,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     NewsComponent::class.java,
@@ -24,5 +25,6 @@ class NewsComponentController(
     "Hírek",
     "Hírek testreszabása",
     menuService = menuService,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 )

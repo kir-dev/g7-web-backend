@@ -21,7 +21,8 @@ class WaypointController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<WaypointEntity>(
     "waypoints",
     WaypointEntity::class, ::WaypointEntity,
@@ -32,6 +33,7 @@ class WaypointController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

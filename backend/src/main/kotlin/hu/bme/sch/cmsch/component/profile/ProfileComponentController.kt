@@ -5,6 +5,7 @@ import hu.bme.sch.cmsch.component.app.ApplicationComponent
 import hu.bme.sch.cmsch.component.app.MenuService
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ControlPermissions
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.stereotype.Controller
@@ -18,6 +19,7 @@ class ProfileComponentController(
     component: ProfileComponent,
     menuService: MenuService,
     auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     ProfileComponent::class.java,
@@ -29,5 +31,6 @@ class ProfileComponentController(
     componentCategory = ApplicationComponent.FUNCTIONALITIES_CATEGORY,
     componentMenuPriority = 6,
     menuService = menuService,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 )

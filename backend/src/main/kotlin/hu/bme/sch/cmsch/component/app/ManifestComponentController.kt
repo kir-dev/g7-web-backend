@@ -3,6 +3,7 @@ package hu.bme.sch.cmsch.component.app
 import hu.bme.sch.cmsch.component.ComponentApiBase
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ControlPermissions
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.stereotype.Controller
@@ -15,7 +16,8 @@ class ManifestComponentController(
     adminMenuService: AdminMenuService,
     component: ManifestComponent,
     menuService: MenuService,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     ManifestComponent::class.java,
@@ -27,7 +29,6 @@ class ManifestComponentController(
     componentCategory = ApplicationComponent.STYLING_CATEGORY,
     componentMenuPriority = 28,
     menuService = menuService,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 )
-
-

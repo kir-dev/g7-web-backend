@@ -24,7 +24,8 @@ class TrackOneGroupController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<TrackGroupVirtualEntity>(
     "track-group",
     TrackGroupVirtualEntity::class, ::TrackGroupVirtualEntity,
@@ -39,6 +40,7 @@ class TrackOneGroupController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

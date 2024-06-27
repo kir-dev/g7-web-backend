@@ -9,6 +9,7 @@ import hu.bme.sch.cmsch.controller.admin.OneDeepEntityPage
 import hu.bme.sch.cmsch.controller.admin.calculateSearchSettings
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ImportService
 import hu.bme.sch.cmsch.service.StaffPermissions
 import hu.bme.sch.cmsch.util.transaction
@@ -36,6 +37,7 @@ class FormController(
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
     env: Environment,
+    storageService: StorageService,
     sheetsComponent: Optional<SheetsComponent>,
     private val formRepository: FormRepository,
     private val sheetsUpdaterService: Optional<SheetsUpdaterService>
@@ -49,6 +51,7 @@ class FormController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

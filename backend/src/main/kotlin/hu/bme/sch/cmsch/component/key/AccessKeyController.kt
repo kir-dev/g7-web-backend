@@ -3,10 +3,7 @@ package hu.bme.sch.cmsch.component.key
 import com.fasterxml.jackson.databind.ObjectMapper
 import hu.bme.sch.cmsch.controller.admin.OneDeepEntityPage
 import hu.bme.sch.cmsch.controller.admin.calculateSearchSettings
-import hu.bme.sch.cmsch.service.AdminMenuService
-import hu.bme.sch.cmsch.service.AuditLogService
-import hu.bme.sch.cmsch.service.ImportService
-import hu.bme.sch.cmsch.service.StaffPermissions
+import hu.bme.sch.cmsch.service.*
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Controller
@@ -24,7 +21,8 @@ class AccessKeyController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<AccessKeyEntity>(
     "access-key",
     AccessKeyEntity::class, ::AccessKeyEntity,
@@ -35,6 +33,7 @@ class AccessKeyController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
@@ -56,4 +55,3 @@ class AccessKeyController(
 
     searchSettings = calculateSearchSettings<AccessKeyEntity>(false)
 )
-

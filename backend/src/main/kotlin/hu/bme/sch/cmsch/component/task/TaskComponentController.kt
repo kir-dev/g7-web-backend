@@ -4,6 +4,7 @@ import hu.bme.sch.cmsch.component.ComponentApiBase
 import hu.bme.sch.cmsch.component.app.MenuService
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ControlPermissions.PERMISSION_CONTROL_TASKS
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.stereotype.Controller
@@ -16,7 +17,8 @@ class TaskComponentController(
     adminMenuService: AdminMenuService,
     component: TaskComponent,
     menuService: MenuService,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     TaskComponent::class.java,
@@ -25,6 +27,6 @@ class TaskComponentController(
     "Feladatok",
     "Feladat beállítások",
     menuService = menuService,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 )
-

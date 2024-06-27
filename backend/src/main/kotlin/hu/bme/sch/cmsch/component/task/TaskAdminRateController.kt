@@ -30,6 +30,7 @@ class TaskAdminRateController(
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
     env: Environment,
+    storageService: StorageService,
     private val clock: TimeService
 ) : TwoDeepEntityPage<GradedTaskGroupDto, SubmittedTaskEntity>(
     "rate-tasks",
@@ -57,6 +58,7 @@ class TaskAdminRateController(
     submittedRepository,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

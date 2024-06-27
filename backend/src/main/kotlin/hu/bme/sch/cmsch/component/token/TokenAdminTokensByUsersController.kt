@@ -23,7 +23,8 @@ class TokenAdminTokensByUsersController(
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
     private val groupRepository: GroupRepository,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : TwoDeepEntityPage<TokenListByUserVirtualEntity, TokenVirtualEntity>(
     "token-properties-user",
     TokenListByUserVirtualEntity::class,
@@ -68,6 +69,7 @@ class TokenAdminTokensByUsersController(
     },
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

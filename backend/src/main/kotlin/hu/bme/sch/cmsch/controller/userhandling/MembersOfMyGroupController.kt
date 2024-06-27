@@ -23,7 +23,8 @@ class MembersOfMyGroupController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<GroupMemberVirtualEntity>(
     "members-of-my-group",
     GroupMemberVirtualEntity::class, ::GroupMemberVirtualEntity,
@@ -39,6 +40,7 @@ class MembersOfMyGroupController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

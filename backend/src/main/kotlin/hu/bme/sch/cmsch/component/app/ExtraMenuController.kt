@@ -22,7 +22,8 @@ class ExtraMenuController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<ExtraMenuEntity>(
     "extra-menus",
     ExtraMenuEntity::class, ::ExtraMenuEntity,
@@ -33,6 +34,7 @@ class ExtraMenuController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

@@ -25,7 +25,8 @@ class RawLocationController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<LocationEntity>(
     "locations",
     LocationEntity::class, ::LocationEntity,
@@ -36,6 +37,7 @@ class RawLocationController(
     locationService,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

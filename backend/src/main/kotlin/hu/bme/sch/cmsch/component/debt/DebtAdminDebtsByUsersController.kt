@@ -29,7 +29,8 @@ class DebtAdminDebtsByUsersController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : TwoDeepEntityPage<DebtsByUserVirtualEntity, SoldProductEntity>(
     "debts-by-users",
     DebtsByUserVirtualEntity::class,
@@ -60,6 +61,7 @@ class DebtAdminDebtsByUsersController(
     soldProductRepository,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

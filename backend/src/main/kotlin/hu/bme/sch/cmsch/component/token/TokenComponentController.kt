@@ -15,7 +15,8 @@ class TokenComponentController(
     adminMenuService: AdminMenuService,
     component: TokenComponent,
     menuService: MenuService,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     TokenComponent::class.java,
@@ -24,5 +25,6 @@ class TokenComponentController(
     "Tokenek",
     "Tokenek testreszabása",
     menuService = menuService,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 )

@@ -15,7 +15,8 @@ class RiddleComponentController(
     adminMenuService: AdminMenuService,
     component: RiddleComponent,
     menuService: MenuService,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     RiddleComponent::class.java,
@@ -24,5 +25,6 @@ class RiddleComponentController(
     "Riddleök",
     "Riddleök testreszabása",
     menuService = menuService,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 )

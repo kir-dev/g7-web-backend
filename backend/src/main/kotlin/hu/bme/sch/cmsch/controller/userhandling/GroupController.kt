@@ -32,7 +32,8 @@ class GroupController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<GroupEntity>(
     "groups",
     GroupEntity::class, ::GroupEntity,
@@ -43,6 +44,7 @@ class GroupController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

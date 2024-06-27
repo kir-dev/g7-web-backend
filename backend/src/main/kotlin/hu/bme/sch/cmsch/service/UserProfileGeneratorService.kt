@@ -14,14 +14,14 @@ import org.springframework.stereotype.Service
 import java.io.File
 import java.io.IOException
 import java.nio.charset.StandardCharsets
-import java.nio.file.Files
-import java.nio.file.Path
 import jakarta.annotation.PostConstruct
+import java.io.ByteArrayOutputStream
 
 
 @Service
 class UserProfileGeneratorService(
-    private val startupPropertyConfig: StartupPropertyConfig
+    private val startupPropertyConfig: StartupPropertyConfig,
+    private val storageService: StorageService
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -32,9 +32,17 @@ class UserProfileGeneratorService(
     }
 
     @Throws(WriterException::class, IOException::class)
-    private fun createQR(data: String, path: String) {
+    private fun createQR(user: UserEntity) {
+        val format = "png"
+        val path = "profiles"
+        val fileName =  "${user.cmschId}.$format"
+        if (storageService.exists(path, fileName)) {
+            log.info("QR code already exists for user ${user.fullName}")
+            return
+        }
+
         val matrix = MultiFormatWriter().encode(
-                String(data.toByteArray(StandardCharsets.UTF_8), StandardCharsets.UTF_8),
+                String(user.cmschId.toByteArray(StandardCharsets.UTF_8), StandardCharsets.UTF_8),
                 BarcodeFormat.QR_CODE,
                 startupPropertyConfig.profileQrCodeSize, startupPropertyConfig.profileQrCodeSize,
                 mutableMapOf(
@@ -44,20 +52,16 @@ class UserProfileGeneratorService(
                 )
         )
 
-        MatrixToImageWriter.writeToPath(matrix,
-                path.substring(path.lastIndexOf('.') + 1),
-                Path.of(path))
+        val qrData = ByteArrayOutputStream()
+        MatrixToImageWriter.writeToStream(matrix, format, qrData)
+        storageService.saveNamedObject(path, fileName, qrData.toByteArray())
+
+        log.info("New QR code was generated to /cdn/$path/$fileName for user ${user.fullName}")
     }
 
     fun generateFullProfileForUser(user: UserEntity) {
         generateProfileIdForUser(user)
-        val fullPath = startupPropertyConfig.profileGenerationTarget + File.separator + user.cmschId + ".png"
-        if (Files.exists(Path.of(fullPath))) {
-            log.info("QR code already exists for user ${user.fullName}")
-            return
-        }
-        createQR(user.cmschId, fullPath)
-        log.info("New QR code was generated to $fullPath for user ${user.fullName}")
+        createQR(user)
     }
 
     fun generateProfileIdForUser(user: UserEntity) {

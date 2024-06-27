@@ -34,7 +34,8 @@ class FreestyleRaceRecordController(
     private val startupPropertyConfig: StartupPropertyConfig,
     private val clock: TimeService,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<FreestyleRaceRecordEntity>(
     "freestyle-race",
     FreestyleRaceRecordEntity::class, ::FreestyleRaceRecordEntity,
@@ -45,6 +46,7 @@ class FreestyleRaceRecordController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

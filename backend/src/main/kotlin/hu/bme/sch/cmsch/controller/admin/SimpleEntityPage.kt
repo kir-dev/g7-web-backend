@@ -25,6 +25,7 @@ abstract class SimpleEntityPage<T : IdentifiableEntity>(
 
     importService: ImportService,
     adminMenuService: AdminMenuService,
+    storageService: StorageService,
     component: ComponentBase,
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
@@ -50,6 +51,7 @@ abstract class SimpleEntityPage<T : IdentifiableEntity>(
     object : ManualRepository<T, Int>() {},
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

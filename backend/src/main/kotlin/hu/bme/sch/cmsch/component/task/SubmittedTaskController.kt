@@ -30,6 +30,7 @@ class SubmittedTaskController(
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
     env: Environment,
+    storageService: StorageService,
     private val clock: TimeService
 ) : OneDeepEntityPage<SubmittedTaskEntity>(
     "submitted-tasks",
@@ -41,6 +42,7 @@ class SubmittedTaskController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

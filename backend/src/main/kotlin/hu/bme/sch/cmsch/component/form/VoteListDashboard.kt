@@ -8,10 +8,7 @@ import hu.bme.sch.cmsch.controller.admin.SimpleEntityPage
 import hu.bme.sch.cmsch.controller.admin.calculateSearchSettings
 import hu.bme.sch.cmsch.model.IdentifiableEntity
 import hu.bme.sch.cmsch.model.RoleType
-import hu.bme.sch.cmsch.service.AdminMenuService
-import hu.bme.sch.cmsch.service.AuditLogService
-import hu.bme.sch.cmsch.service.ImportService
-import hu.bme.sch.cmsch.service.StaffPermissions
+import hu.bme.sch.cmsch.service.*
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Controller
@@ -43,6 +40,7 @@ class VoteListDashboard(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     env: Environment,
+    storageService: StorageService,
     private val formService: FormService,
     transactionManager: PlatformTransactionManager
 ) : SimpleEntityPage<FormVotesDto>(
@@ -68,6 +66,7 @@ class VoteListDashboard(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

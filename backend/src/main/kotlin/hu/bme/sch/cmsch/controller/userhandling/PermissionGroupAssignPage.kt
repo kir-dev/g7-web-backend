@@ -13,6 +13,7 @@ import hu.bme.sch.cmsch.repository.PermissionGroupRepository
 import hu.bme.sch.cmsch.repository.UserRepository
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.ImportService
 import hu.bme.sch.cmsch.service.StaffPermissions
 import hu.bme.sch.cmsch.service.StaffPermissions.PERMISSION_SHOW_PERMISSION_GROUPS
@@ -57,6 +58,7 @@ class PermissionGroupAssignPage(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     env: Environment,
+    storageService: StorageService,
     transactionManager: PlatformTransactionManager,
     private val userRepository: UserRepository,
     private val permissionGroupRepository: PermissionGroupRepository,
@@ -75,6 +77,7 @@ class PermissionGroupAssignPage(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

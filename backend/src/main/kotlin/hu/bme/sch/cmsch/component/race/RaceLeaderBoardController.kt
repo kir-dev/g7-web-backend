@@ -26,7 +26,8 @@ class RaceLeaderBoardController(
     private val raceService: RaceService,
     private val startupPropertyConfig: StartupPropertyConfig,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<RaceEntryDto>(
     "race-leaderboard",
     RaceEntryDto::class, ::RaceEntryDto,
@@ -49,6 +50,7 @@ class RaceLeaderBoardController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
@@ -70,4 +72,3 @@ class RaceLeaderBoardController(
 
     searchSettings = calculateSearchSettings<RaceEntryDto>(false)
 )
-

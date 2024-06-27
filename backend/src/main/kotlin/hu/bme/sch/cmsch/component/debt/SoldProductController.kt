@@ -24,7 +24,8 @@ class SoldProductController(
     objectMapper: ObjectMapper,
     private val clock: TimeService,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<SoldProductEntity>(
     "debts",
     SoldProductEntity::class, ::SoldProductEntity,
@@ -35,6 +36,7 @@ class SoldProductController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

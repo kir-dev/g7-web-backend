@@ -23,7 +23,8 @@ class TokenSubmissionsController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<TokenPropertyRawView>(
     "raw-token-properties",
     TokenPropertyRawView::class, ::TokenPropertyRawView,
@@ -69,6 +70,7 @@ class TokenSubmissionsController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

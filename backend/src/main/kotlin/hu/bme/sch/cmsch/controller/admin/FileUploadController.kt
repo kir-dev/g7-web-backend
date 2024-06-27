@@ -1,12 +1,8 @@
 package hu.bme.sch.cmsch.controller.admin
 
 import hu.bme.sch.cmsch.component.app.ApplicationComponent
-import hu.bme.sch.cmsch.service.AdminMenuEntry
-import hu.bme.sch.cmsch.service.AdminMenuService
-import hu.bme.sch.cmsch.service.AuditLogService
-import hu.bme.sch.cmsch.service.ControlPermissions
+import hu.bme.sch.cmsch.service.*
 import hu.bme.sch.cmsch.util.getUser
-import hu.bme.sch.cmsch.util.uploadFile
 import jakarta.annotation.PostConstruct
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
@@ -21,7 +17,8 @@ import kotlin.math.absoluteValue
 class FileUploadController(
     private val adminMenuService: AdminMenuService,
     private val applicationComponent: ApplicationComponent,
-    private val auditLog: AuditLogService
+    private val auditLog: AuditLogService,
+    private val storageService: StorageService
 ) {
 
     private val permissionControl = ControlPermissions.PERMISSION_UPLOAD_FILES
@@ -78,7 +75,7 @@ class FileUploadController(
             val newName = name.replace(" ", "_").replace(Regex("[^A-Za-z0-9_]+"), "").uppercase() +
                     "_${Random().nextLong().absoluteValue.toString(36).uppercase()}" +
                     originalFilename.substring(if (originalFilename.contains(".")) originalFilename.lastIndexOf('.') else 0)
-            file.uploadFile("public", newName)
+            storageService.saveNamedObject("public", newName, file)
             newNames.add(newName)
         }
         return "redirect:/admin/control/upload-file?uploaded=${newNames.joinToString(",")}"

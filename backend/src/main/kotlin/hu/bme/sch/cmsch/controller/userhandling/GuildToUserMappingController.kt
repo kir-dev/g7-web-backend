@@ -7,10 +7,7 @@ import hu.bme.sch.cmsch.controller.admin.OneDeepEntityPage
 import hu.bme.sch.cmsch.controller.admin.calculateSearchSettings
 import hu.bme.sch.cmsch.model.GuildToUserMappingEntity
 import hu.bme.sch.cmsch.repository.GuildToUserMappingRepository
-import hu.bme.sch.cmsch.service.AdminMenuService
-import hu.bme.sch.cmsch.service.AuditLogService
-import hu.bme.sch.cmsch.service.ImportService
-import hu.bme.sch.cmsch.service.StaffPermissions
+import hu.bme.sch.cmsch.service.*
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.PlatformTransactionManager
@@ -26,7 +23,8 @@ class GuildToUserMappingController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<GuildToUserMappingEntity>(
     "guild-to-user",
     GuildToUserMappingEntity::class, ::GuildToUserMappingEntity,
@@ -38,6 +36,7 @@ class GuildToUserMappingController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

@@ -14,7 +14,8 @@ class AdmissionComponentController(
     adminMenuService: AdminMenuService,
     component: AdmissionComponent,
     menuService: MenuService,
-    auditLogService: AuditLogService
+    auditLogService: AuditLogService,
+    storageService: StorageService
 ) : ComponentApiBase(
     adminMenuService,
     AdmissionComponent::class.java,
@@ -23,7 +24,8 @@ class AdmissionComponentController(
     componentCategoryName = "Beléptetés",
     componentMenuName = "Jogosultságok",
     menuService = menuService,
-    auditLogService = auditLogService
+    auditLogService = auditLogService,
+    storageService = storageService
 ) {
     init {
         adminMenuService.registerEntry(AdmissionComponent::class.java.simpleName, AdminMenuEntry(

@@ -3,14 +3,12 @@ package hu.bme.sch.cmsch.component.form
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.csv.CsvMapper
-import hu.bme.sch.cmsch.component.sheets.SHEETS_WIZARD
 import hu.bme.sch.cmsch.controller.admin.ControlAction
 import hu.bme.sch.cmsch.controller.admin.TwoDeepEntityPage
 import hu.bme.sch.cmsch.extending.FormSubmissionListener
 import hu.bme.sch.cmsch.repository.ManualRepository
 import hu.bme.sch.cmsch.service.*
 import hu.bme.sch.cmsch.util.getUser
-import hu.bme.sch.cmsch.util.transaction
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.core.env.Environment
 import org.springframework.http.MediaType
@@ -18,9 +16,6 @@ import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.PlatformTransactionManager
 import org.springframework.web.bind.annotation.*
-import java.net.URLEncoder
-import java.nio.charset.StandardCharsets
-import kotlin.jvm.optionals.getOrNull
 
 @Controller
 @RequestMapping("/admin/control/signup-responses")
@@ -37,6 +32,7 @@ class ResponsesController(
     env: Environment,
     transactionManager: PlatformTransactionManager,
     private val listeners: List<FormSubmissionListener>,
+    storageService: StorageService
 ) : TwoDeepEntityPage<FormVirtualEntity, ResponseEntity>(
     "signup-responses",
     FormVirtualEntity::class,
@@ -71,6 +67,7 @@ class ResponsesController(
     responseRepository,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
@@ -162,5 +159,3 @@ class ResponsesController(
     }
 
 }
-
-

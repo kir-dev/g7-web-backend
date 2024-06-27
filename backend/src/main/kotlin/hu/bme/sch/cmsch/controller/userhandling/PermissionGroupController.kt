@@ -5,17 +5,12 @@ import hu.bme.sch.cmsch.component.ComponentBase
 import hu.bme.sch.cmsch.component.app.UserHandlingComponent
 import hu.bme.sch.cmsch.component.login.CmschUser
 import hu.bme.sch.cmsch.component.staticpage.StaticPageService
-import hu.bme.sch.cmsch.config.StartupPropertyConfig
-import hu.bme.sch.cmsch.controller.admin.ButtonAction
 import hu.bme.sch.cmsch.controller.admin.ControlAction
 import hu.bme.sch.cmsch.controller.admin.OneDeepEntityPage
 import hu.bme.sch.cmsch.controller.admin.calculateSearchSettings
 import hu.bme.sch.cmsch.model.PermissionGroupEntity
-import hu.bme.sch.cmsch.repository.GroupRepository
 import hu.bme.sch.cmsch.repository.PermissionGroupRepository
-import hu.bme.sch.cmsch.repository.UserRepository
 import hu.bme.sch.cmsch.service.*
-import hu.bme.sch.cmsch.service.StaffPermissions.PERMISSION_SELL_ANY_PRODUCT
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Controller
 import org.springframework.transaction.PlatformTransactionManager
@@ -37,6 +32,7 @@ class PermissionGroupController(
     private val staticPageService: Optional<StaticPageService>,
     components: MutableList<out ComponentBase>,
     env: Environment,
+    storageService: StorageService,
     transactionManager: PlatformTransactionManager,
     private val permissionsService: PermissionsService,
     private val permissionGroupService: PermissionGroupService,
@@ -51,6 +47,7 @@ class PermissionGroupController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

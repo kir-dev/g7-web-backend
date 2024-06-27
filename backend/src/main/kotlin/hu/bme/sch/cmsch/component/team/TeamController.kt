@@ -21,7 +21,8 @@ class TeamController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<TeamJoinRequestEntity>(
     "join-requests",
     TeamJoinRequestEntity::class, ::TeamJoinRequestEntity,
@@ -32,6 +33,7 @@ class TeamController(
     repo,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

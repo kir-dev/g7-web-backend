@@ -43,6 +43,7 @@ data class StartupPropertyConfig @ConstructorBinding constructor(
     val nodeName: String,
 
     // CDN
+    val storageImplementation: StorageImplementation,
     val cdnCacheMaxAge: Long
 ) {
 

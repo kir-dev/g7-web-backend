@@ -21,7 +21,8 @@ class TokenAdminTokensByTypeController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : TwoDeepEntityPage<TokenStatVirtualEntity, TokenPropertyVirtualEntity>(
     "token-properties-type",
     TokenStatVirtualEntity::class,
@@ -65,6 +66,7 @@ class TokenAdminTokensByTypeController(
     },
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

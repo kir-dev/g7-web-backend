@@ -23,7 +23,8 @@ class TeamIntroductionReviewController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<TeamIntroductionEntity>(
     "team-introductions",
     TeamIntroductionEntity::class, ::TeamIntroductionEntity,
@@ -34,6 +35,7 @@ class TeamIntroductionReviewController(
     teamIntroductionRepository,
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

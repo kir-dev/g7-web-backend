@@ -16,8 +16,8 @@ import hu.bme.sch.cmsch.model.RoleType
 import hu.bme.sch.cmsch.model.UserEntity
 import hu.bme.sch.cmsch.repository.GroupRepository
 import hu.bme.sch.cmsch.repository.UserRepository
+import hu.bme.sch.cmsch.service.StorageService
 import hu.bme.sch.cmsch.service.TimeService
-import hu.bme.sch.cmsch.util.uploadFile
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.retry.annotation.Backoff
@@ -47,7 +47,8 @@ open class TeamService(
     private val formsService: Optional<FormService>,
     private val qrFightService: Optional<QrFightService>,
     private val riddleReadonlyService: Optional<RiddleReadonlyService>,
-    private val clock: TimeService
+    private val clock: TimeService,
+    private val storageService: StorageService
 ) {
     companion object {
         val target = "team"
@@ -590,7 +591,8 @@ open class TeamService(
             introduction = description,
         )
         if (logo != null)
-            introduction.logo = logo.uploadFile(target) ?: throw IllegalStateException("Failed to save the image")
+            introduction.logo = storageService.saveObject(target, logo)
+                .orElseThrow { throw IllegalStateException("Failed to save the image") }
 
         teamIntroductionRepository.save(introduction)
         log.info(

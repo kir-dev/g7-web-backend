@@ -21,7 +21,8 @@ class CheckRatingsController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<CheckRatingVirtualEntity>(
     "check-ratings",
     CheckRatingVirtualEntity::class, ::CheckRatingVirtualEntity,
@@ -37,6 +38,7 @@ class CheckRatingsController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

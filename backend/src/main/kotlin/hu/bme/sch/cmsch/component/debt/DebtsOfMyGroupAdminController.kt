@@ -30,7 +30,8 @@ class DebtsOfMyGroupAdminController(
     auditLog: AuditLogService,
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : SimpleEntityPage<SoldProductEntity>(
     "debts-of-my-group",
     SoldProductEntity::class, ::SoldProductEntity,
@@ -45,6 +46,7 @@ class DebtsOfMyGroupAdminController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,

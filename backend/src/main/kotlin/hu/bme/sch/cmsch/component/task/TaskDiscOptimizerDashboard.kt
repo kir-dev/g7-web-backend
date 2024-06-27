@@ -7,6 +7,7 @@ import hu.bme.sch.cmsch.component.login.CmschUser
 import hu.bme.sch.cmsch.config.StartupPropertyConfig
 import hu.bme.sch.cmsch.service.AdminMenuService
 import hu.bme.sch.cmsch.service.AuditLogService
+import hu.bme.sch.cmsch.service.FilesystemStorageService
 import hu.bme.sch.cmsch.service.ImplicitPermissions
 import hu.bme.sch.cmsch.util.getUser
 import org.slf4j.LoggerFactory
@@ -29,7 +30,7 @@ private const val VIEW = "task-disc-optimize"
 
 @Controller
 @RequestMapping("/admin/control/$VIEW")
-@ConditionalOnBean(value = [TaskComponent::class])
+@ConditionalOnBean(value = [TaskComponent::class, FilesystemStorageService::class])
 class TaskDiscOptimizerDashboard(
     adminMenuService: AdminMenuService,
     applicationComponent: TaskComponent,

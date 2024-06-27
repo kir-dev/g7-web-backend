@@ -2,7 +2,6 @@ package hu.bme.sch.cmsch.component.token
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import hu.bme.sch.cmsch.controller.admin.OneDeepEntityPage
-import hu.bme.sch.cmsch.repository.GroupRepository
 import hu.bme.sch.cmsch.repository.ManualRepository
 import hu.bme.sch.cmsch.repository.UserRepository
 import hu.bme.sch.cmsch.service.*
@@ -32,7 +31,8 @@ class TokenAdminTokensByTeamController(
     objectMapper: ObjectMapper,
     transactionManager: PlatformTransactionManager,
     private val userRepository: UserRepository,
-    env: Environment
+    env: Environment,
+    storageService: StorageService
 ) : OneDeepEntityPage<UserGroupTokenCount>(
     "token-properties-team",
     UserGroupTokenCount::class, ::UserGroupTokenCount,
@@ -54,6 +54,7 @@ class TokenAdminTokensByTeamController(
 
     importService,
     adminMenuService,
+    storageService,
     component,
     auditLog,
     objectMapper,
