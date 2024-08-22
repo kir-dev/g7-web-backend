@@ -1,9 +1,7 @@
-import { ProfileView } from '../../../util/views/profile.view'
 import {
   Box,
   Button,
   Center,
-  Divider,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -13,16 +11,16 @@ import {
   Text,
   useDisclosure
 } from '@chakra-ui/react'
-import QRCode from 'react-qr-code'
 import { FaQrcode } from 'react-icons/fa'
+import QRCode from 'react-qr-code'
 import { Profile } from '../../../api/contexts/config/types'
 import { WalletButton } from '../../../common-components/WalletButton'
+import { ProfileView } from '../../../util/views/profile.view'
 
 export const ProfileQR = ({ profile, component }: { profile: ProfileView; component: Profile }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <>
-      <Divider my={10} borderWidth={2} w={'100%'} />
       <Center flexDirection="column">
         <Text fontSize="3xl" fontWeight={500}>
           {component.qrTitle}

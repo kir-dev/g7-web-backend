@@ -26,7 +26,8 @@ export enum Paths {
   MY_TEAM = 'my-team',
   TEAM_ADMIN = 'team-admin',
   ACCESS_KEY = 'access-key',
-  MAP = 'map'
+  MAP = 'map',
+  DEBT = 'debt'
 }
 
 export enum AbsolutePaths {
@@ -56,7 +57,8 @@ export enum AbsolutePaths {
   QR_FIGHT = '/qr-fight',
   LEADER_BOARD = '/leaderboard',
   ACCESS_KEY = '/access-key',
-  MAP = '/map'
+  MAP = '/map',
+  DEBT = '/debt'
 }
 
 export enum ApiPaths {
@@ -86,5 +88,6 @@ export enum ApiPaths {
   ACCESS_KEY = '/api/access-key',
   HOME_NEWS = '/api/home/news',
   ADD_PUSH_NOTIFICATION_TOKEN = '/api/pushnotification/add-token',
-  DELETE_PUSH_NOTIFICATION_TOKEN = '/api/pushnotification/delete-token'
+  DELETE_PUSH_NOTIFICATION_TOKEN = '/api/pushnotification/delete-token',
+  DEBTS = '/api/debts'
 }

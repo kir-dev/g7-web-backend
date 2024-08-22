@@ -5,6 +5,9 @@ export interface DebtView {
   representativeName: string
   payed: boolean
   shipped: boolean
-  log: string
-  materialIcon: string
+  icon: string
+}
+
+export interface DebtDto {
+  debts: DebtView[]
 }
