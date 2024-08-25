@@ -14,6 +14,7 @@ import { NewsArticleView } from '../../util/views/news.view'
 import Clock from '../countdown/components/clock'
 import NewsListItem from '../news/components/NewsListItem'
 import { EmbeddedVideo } from './components/EmbeddedVideo'
+import { ImageCarousel } from './components/ImageCarousel.tsx'
 import { Schedule } from './components/Schedule'
 
 const HomePage = () => {
@@ -121,6 +122,8 @@ const HomePage = () => {
           </VStack>
         </VStack>
       )}
+
+      <ImageCarousel images={homeConfig?.images ?? []} />
     </CmschPage>
   )
 }

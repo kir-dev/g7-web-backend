@@ -108,6 +108,7 @@ export interface Home {
   youtubeVideoId: string
   showEvents: boolean
   showNews: boolean
+  images: string[]
 }
 
 export interface News {
