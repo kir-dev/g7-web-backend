@@ -86,8 +86,10 @@ data class ProductEntity(
     @ColumnDefault("'payments'")
     @Column(nullable = false, length = 255)
     @field:JsonView(value = [ Edit::class, Preview::class, FullDetails::class ])
-    @property:GenerateInput(order = 8, label = "Material Ikon",
-        note = "Innen kell kimásolni a nevét az ikonnak: https://fonts.google.com/icons")
+    @property:GenerateInput(order = 8, label = "React Icons - Fontawesome 5 ikon név",
+        note = "Innen kell kimásolni a nevét az ikonnak:\n" +
+                "https://react-icons.github.io/react-icons/icons/fa\n" +
+                "Ajánlott ikonok: FaHamburger, FaHotdog, FaTshirt, FaPizzaSlice, FaCocktail, FaMoneyBill, FaUtensils, FaUtensilSpoon, FaVial, FaBox, FaBeer, FaHandMiddleFinger, FaShapes, FaHeart, FaFrog")
     @property:GenerateOverview(visible = false)
     @property:ImportFormat(ignore = false, columnId = 6)
     var materialIcon: String = "payments"

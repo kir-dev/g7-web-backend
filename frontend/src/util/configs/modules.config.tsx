@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from 'react'
+
+import { DebtModule } from '../../route-modules/Debt.module.tsx'
 import { MapModule } from '../../route-modules/Map.module'
 import { RiddleModule } from '../../route-modules/Riddle.module'
 import { TaskModule } from '../../route-modules/Task.module'
@@ -35,7 +37,8 @@ export enum AvailableModules {
   RACE = 'RACE',
   QR_FIGHT = 'QR_FIGHT',
   ACCESS_KEY = 'ACCESS_KEY',
-  MAP = 'MAP'
+  MAP = 'MAP',
+  DEBT = 'DEBT'
 }
 
 export const RoutesForModules: Record<AvailableModules, FunctionComponent> = {
@@ -55,7 +58,8 @@ export const RoutesForModules: Record<AvailableModules, FunctionComponent> = {
   [AvailableModules.QR_FIGHT]: QRFightModule,
   [AvailableModules.TEAM]: TeamModule,
   [AvailableModules.ACCESS_KEY]: AccessKeyModule,
-  [AvailableModules.MAP]: MapModule
+  [AvailableModules.MAP]: MapModule,
+  [AvailableModules.DEBT]: DebtModule
 }
 
 export function GetRoutesForModules(modules: AvailableModules[]) {
@@ -79,5 +83,6 @@ export const EnabledModules: AvailableModules[] = [
   AvailableModules.QR_FIGHT,
   AvailableModules.TEAM,
   AvailableModules.ACCESS_KEY,
-  AvailableModules.MAP
+  AvailableModules.MAP,
+  AvailableModules.DEBT
 ]
