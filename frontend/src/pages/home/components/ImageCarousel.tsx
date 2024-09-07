@@ -20,22 +20,29 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
   if (images.length === 0) return null
 
   return (
-    <Box marginTop={10} overflowX="hidden">
-      <Flex transform={`translateX(-${currentImageIndex * 100}%)`} transition="transform .5s">
+    <Flex flexDirection="column" marginTop={10} overflowX="clip">
+      <Flex
+        width={`${images.length * 100}%`}
+        flexDirection="row"
+        transform={`translateX(-${(currentImageIndex / images.length) * 100}%)`}
+        transition="transform .5s"
+      >
         {images.map((image, index) => (
-          <Image key={index} src={image} w="100%" maxH="50rem" objectFit="contain" />
+          <Box flex={1}>
+            <Image key={index} src={image} w="100%" maxH="50rem" objectFit="contain" />
+          </Box>
         ))}
       </Flex>
-      <Flex marginTop={5} justify="space-between">
+      <Flex paddingTop={5} alignItems="center" justify="space-between">
         <DirectionButton direction={Directions.LEFT} onClick={previousImage} />
-        <ButtonGroup>
+        <ButtonGroup display="flex" alignItems="center">
           {images.map((_image, index) => (
             <CurrentImageIndicatorDot key={index} index={index} currentIndex={currentImageIndex} onClick={setCurrentImageIndex} />
           ))}
         </ButtonGroup>
         <DirectionButton direction={Directions.RIGHT} onClick={nextImage} />
       </Flex>
-    </Box>
+    </Flex>
   )
 }
 
@@ -47,8 +54,8 @@ type CurrentImageIndicatorDotProps = {
 
 const CurrentImageIndicatorDot = ({ index, currentIndex, onClick }: CurrentImageIndicatorDotProps) => (
   <Button
-    height={10}
-    width={10}
+    height="10px"
+    width="10px"
     padding={0}
     borderWidth={2}
     borderStyle="solid"
@@ -74,7 +81,7 @@ enum Directions {
 }
 
 const DirectionButton = ({ direction, onClick }: DirectionButtonProps) => (
-  <Button onClick={onClick} fontSize="6xl" padding={0} variant="ghost" color="gray.500">
+  <Button onClick={onClick} fontSize="6xl" padding={0} variant="ghost">
     {direction === Directions.LEFT ? <ChevronLeftIcon /> : <ChevronRightIcon />}
   </Button>
 )

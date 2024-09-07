@@ -23,6 +23,7 @@ export interface Components {
   extraPage: ExtraPage
   groupselection: GroupSelection
   home: Home
+  gallery: Gallery
   impressum: Impressum
   leaderboard: Leaderboard
   location: Location
@@ -108,7 +109,11 @@ export interface Home {
   youtubeVideoId: string
   showEvents: boolean
   showNews: boolean
-  images: string[]
+  showGalleryImages: boolean
+}
+
+export interface Gallery {
+  title: string
 }
 
 export interface News {
