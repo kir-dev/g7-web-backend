@@ -85,6 +85,7 @@ export enum ApiPaths {
   ORGANIZATION = '/api/organization',
   ACCESS_KEY = '/api/access-key',
   HOME_NEWS = '/api/home/news',
+  HOME_GALLERY = '/api/gallery/home',
   ADD_PUSH_NOTIFICATION_TOKEN = '/api/pushnotification/add-token',
   DELETE_PUSH_NOTIFICATION_TOKEN = '/api/pushnotification/delete-token'
 }

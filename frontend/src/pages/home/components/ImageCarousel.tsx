@@ -1,14 +1,14 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
-import { Box, Button, ButtonGroup, Flex, Image, useColorModeValue } from '@chakra-ui/react'
+import { Box, Button, ButtonGroup, Flex, Image } from '@chakra-ui/react'
 import { useState } from 'react'
-import { MapImageView } from '../../../util/views/mapImage.view'
 
 type ImageCarouselProps = {
-  images: MapImageView[]
+  images: string[]
 }
 
 export const ImageCarousel = ({ images }: ImageCarouselProps) => {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0)
+
   const previousImage = () => {
     const previousIndex = currentImageIndex - 1
     setCurrentImageIndex(previousIndex < 0 ? images.length - 1 : previousIndex)
@@ -18,28 +18,31 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
     setCurrentImageIndex(nextIndex > images.length - 1 ? 0 : nextIndex)
   }
   if (images.length === 0) return null
+
   return (
-    <Box marginTop={10}>
-      {images.map((image, index) => (
-        <Image
-          key={index}
-          src={useColorModeValue(image.light, image.dark)}
-          w="100%"
-          maxH="50rem"
-          objectFit="contain"
-          display={index === currentImageIndex ? 'block' : 'none'}
-        />
-      ))}
-      <Flex marginTop={5} justify="space-between">
+    <Flex flexDirection="column" marginTop={10} overflowX="clip">
+      <Flex
+        width={`${images.length * 100}%`}
+        flexDirection="row"
+        transform={`translateX(-${(currentImageIndex / images.length) * 100}%)`}
+        transition="transform .5s"
+      >
+        {images.map((image, index) => (
+          <Box flex={1}>
+            <Image key={index} src={image} w="100%" maxH="50rem" objectFit="contain" />
+          </Box>
+        ))}
+      </Flex>
+      <Flex paddingTop={5} alignItems="center" justify="space-between">
         <DirectionButton direction={Directions.LEFT} onClick={previousImage} />
-        <ButtonGroup>
+        <ButtonGroup display="flex" alignItems="center">
           {images.map((_image, index) => (
             <CurrentImageIndicatorDot key={index} index={index} currentIndex={currentImageIndex} onClick={setCurrentImageIndex} />
           ))}
         </ButtonGroup>
         <DirectionButton direction={Directions.RIGHT} onClick={nextImage} />
       </Flex>
-    </Box>
+    </Flex>
   )
 }
 
@@ -51,8 +54,8 @@ type CurrentImageIndicatorDotProps = {
 
 const CurrentImageIndicatorDot = ({ index, currentIndex, onClick }: CurrentImageIndicatorDotProps) => (
   <Button
-    height={10}
-    width={10}
+    height="10px"
+    width="10px"
     padding={0}
     borderWidth={2}
     borderStyle="solid"
@@ -78,7 +81,7 @@ enum Directions {
 }
 
 const DirectionButton = ({ direction, onClick }: DirectionButtonProps) => (
-  <Button onClick={onClick} fontSize="6xl" padding={0} variant="ghost" color="gray.500">
+  <Button onClick={onClick} fontSize="6xl" padding={0} variant="ghost">
     {direction === Directions.LEFT ? <ChevronLeftIcon /> : <ChevronRightIcon />}
   </Button>
 )

@@ -14,11 +14,14 @@ import { NewsArticleView } from '../../util/views/news.view'
 import Clock from '../countdown/components/clock'
 import NewsListItem from '../news/components/NewsListItem'
 import { EmbeddedVideo } from './components/EmbeddedVideo'
+import { ImageCarousel } from './components/ImageCarousel.tsx'
 import { Schedule } from './components/Schedule'
+import { useHomeGallery } from '../../api/hooks/gallery/useHomeGallery.ts'
 
 const HomePage = () => {
   const homeNews = useHomeNews()
   const eventList = useEventListQuery()
+  const homeGallery = useHomeGallery()
   const config = useConfigContext()
   const countdownConfig = config?.components.countdown
   const homeConfig = config?.components.home
@@ -120,6 +123,10 @@ const HomePage = () => {
             </LinkButton>
           </VStack>
         </VStack>
+      )}
+
+      {homeConfig.showGalleryImages && config.components.gallery && homeGallery.data && (
+        <ImageCarousel images={homeGallery.data?.photos?.map((item) => item.url) ?? []} />
       )}
     </CmschPage>
   )
