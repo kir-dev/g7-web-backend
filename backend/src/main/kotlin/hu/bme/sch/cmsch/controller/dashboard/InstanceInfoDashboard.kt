@@ -87,7 +87,6 @@ class InstanceInfoDashboard(
             listOf("Time zone id",                  startupPropertyConfig.zoneId),
             listOf("Mailgun token length",          startupPropertyConfig.mailgunToken.length.toString()),
             listOf("Session validity (ms)",         startupPropertyConfig.sessionValidityInMilliseconds.toString()),
-            listOf("Increased session time (ms)",   startupPropertyConfig.increasedSessionTime.toString()),
             listOf("Profile QR enabled",            startupPropertyConfig.profileQrEnabled.toString()),
             listOf("Profile QR prefix",             startupPropertyConfig.profileQrPrefix),
             listOf("Profile generation target",     startupPropertyConfig.profileGenerationTarget),

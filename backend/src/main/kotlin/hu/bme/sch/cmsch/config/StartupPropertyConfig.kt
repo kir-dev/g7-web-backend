@@ -33,9 +33,6 @@ data class StartupPropertyConfig @ConstructorBinding constructor(
     val challengeOwnershipMode: OwnershipType,
     val raceOwnershipMode: OwnershipType,
 
-    // Increased session
-    val increasedSessionTime: Int,
-
     // Microservice
     val masterRole: Boolean,
     val riddleMicroserviceEnabled: Boolean,

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.*
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
-const val SESSION_TOKEN_COLLECTOR_ATTRIBUTE = "TOKEN_COLLECTOR_ATTRIBUTE"
-
 @Controller
 @RequestMapping("/api")
 @ConditionalOnBean(TokenComponent::class)
@@ -56,23 +54,11 @@ class TokenApiController(
         }
     }
 
-    @GetMapping("/token-after-login")
-    fun submitTokenAfterLogin(request: HttpServletRequest, auth: Authentication): String {
-        val token = request.getSession(true).getAttribute(SESSION_TOKEN_COLLECTOR_ATTRIBUTE)?.toString()
-        request.getSession(true).setAttribute(SESSION_TOKEN_COLLECTOR_ATTRIBUTE, null)
-        return if (token == null) {
-            "redirect:${applicationComponent.siteUrl.getValue()}?error=failed-to-redeem"
-        } else {
-            collectToken(auth, token)
-        }
-    }
-
     @GetMapping("/qr/{token}")
-    fun readQrManually(@PathVariable token: String, request: HttpServletRequest, auth: Authentication?): String {
+    fun readQrManually(@PathVariable token: String, auth: Authentication?): String {
         return try {
             val user = auth?.getUserOrNull()
             if (user == null) {
-                request.getSession(true).setAttribute(SESSION_TOKEN_COLLECTOR_ATTRIBUTE, token)
                 "redirect:${applicationComponent.siteUrl.getValue()}login"
             } else {
                 collectToken(auth, token)
