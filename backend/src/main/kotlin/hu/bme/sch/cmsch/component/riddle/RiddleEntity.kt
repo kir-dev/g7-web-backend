@@ -42,7 +42,8 @@ data class RiddleEntity(
 
     @field:JsonView(value = [ Edit::class ])
     @Column(nullable = false)
-    @property:GenerateInput(maxLength = 128, order = 3, label = "Megoldás")
+    @property:GenerateInput(maxLength = 128, order = 3, label = "Megoldás", note = "A lehetséges megoldásokat pontosvesszővel elválasztva lehet megadni;"
+            + "Pontosvesszőt a lehetséges válaszok nem tartalmazhatnak")
     @property:GenerateOverview(visible = false)
     @property:ImportFormat
     var solution: String = "",
