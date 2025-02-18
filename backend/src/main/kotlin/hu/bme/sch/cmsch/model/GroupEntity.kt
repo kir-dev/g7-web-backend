@@ -17,7 +17,7 @@ import org.springframework.core.env.Environment
 @Entity
 @Table(
     name = "groups",
-    indexes = [Index(name = "idx_group_name", columnList = "name")]
+    indexes = [Index(columnList = "name", unique = true)]
 )
 data class GroupEntity(
     @Id
